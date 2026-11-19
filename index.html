@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PORTFOLIO_OS</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Russo+One&family=Tektur:wght@700;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="hud-frame" aria-hidden="true">
+    <svg class="hud-svg" viewBox="0 0 1920 1080" preserveAspectRatio="none">
+      <polygon
+        class="hud-border"
+        points="24,24 1575,24 1592,38 1732,38 1749,24 1896,24 1896,356 1868,376 1868,708 1896,728 1896,1056 346,1056 329,1042 186,1042 169,1056 24,1056 24,728 52,708 52,376 24,356"
+      />
+    </svg>
+  </div>
+
+  <main class="os-container">
+    <header class="os-header">
+      <div class="system-status">
+        <p class="status-prompt">Выберите проект</p>
+        <p class="status-version">PORTFOLIO_OS v0.1</p>
+      </div>
+
+      <div class="hero-title-group">
+        <h1 class="hero-title">
+          <span>ДОБРО</span>
+          <span>ПОЖАЛОВАТЬ</span>
+        </h1>
+        <h2 class="hero-subtitle">МОИ ПРОЕКТЫ</h2>
+      </div>
+    </header>
+
+    <div class="bg-code bg-code-top" aria-hidden="true">
+<pre>import random
+names = ["world", "friend", "cat"]
+print(f"Hello, {random.choice(names)}!")</pre>
+    </div>
+
+    <div class="bg-code bg-code-right" aria-hidden="true">
+<pre>total = sum(range(1, 101))
+print("enter number 1 - 100:")
+print(total)</pre>
+    </div>
+
+    <section class="projects-grid" aria-label="Список проектов">
+      <article class="project-card-wrapper">
+        <a href="#project-1" class="project-card" aria-label="Проект 1">
+          <div class="project-card-inner"></div>
+        </a>
+      </article>
+
+      <article class="project-card-wrapper">
+        <a href="#project-2" class="project-card" aria-label="Проект 2">
+          <div class="project-card-inner"></div>
+        </a>
+      </article>
+
+      <article class="project-card-wrapper project-card-wrapper--right">
+        <img src="caprismol.png" alt="Capri" class="capri-overlay">
+        <a href="#project-3" class="project-card" aria-label="Проект 3">
+          <div class="project-card-inner"></div>
+        </a>
+      </article>
+    </section>
+  </main>
+</body>
+</html>
