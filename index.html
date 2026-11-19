@@ -47,26 +47,130 @@ print("enter number 1 - 100:")
 print(total)</pre>
     </div>
 
-    <section class="projects-grid" aria-label="Список проектов">
-      <article class="project-card-wrapper">
-        <a href="#project-1" class="project-card" aria-label="Проект 1">
-          <div class="project-card-inner"></div>
-        </a>
-      </article>
-
-      <article class="project-card-wrapper">
-        <a href="#project-2" class="project-card" aria-label="Проект 2">
-          <div class="project-card-inner"></div>
-        </a>
-      </article>
-
-      <article class="project-card-wrapper project-card-wrapper--right">
-        <img src="caprismol.png" alt="Capri" class="capri-overlay">
-        <a href="#project-3" class="project-card" aria-label="Проект 3">
-          <div class="project-card-inner"></div>
-        </a>
-      </article>
-    </section>
+    <section class="projects-grid" id="projects-grid" aria-label="Список проектов"></section>
   </main>
+
+  <script src="projects.js"></script>
+  <script>
+    (function () {
+      const grid = document.getElementById('projects-grid');
+      if (!grid || typeof PROJECTS === 'undefined' || !Array.isArray(PROJECTS)) {
+        return;
+      }
+
+      const fragment = document.createDocumentFragment();
+
+      PROJECTS.forEach((project, index) => {
+        const wrapper = document.createElement('article');
+        wrapper.className = 'project-card-wrapper';
+
+        if (index === 2) {
+          wrapper.classList.add('project-card-wrapper--right');
+          const capriImg = document.createElement('img');
+          capriImg.src = 'caprismol.png';
+          capriImg.alt = 'Capri';
+          capriImg.className = 'capri-overlay';
+          wrapper.appendChild(capriImg);
+        }
+
+        const rawUrl = typeof project.url === 'string' ? project.url.trim() : '#';
+        const isExternal = /^https?:\/\//i.test(rawUrl);
+        const safeUrl = isExternal || rawUrl.startsWith('#') || rawUrl.startsWith('/') ? rawUrl : '#';
+        const isPlaceholder = safeUrl === '#';
+
+        const cardLink = document.createElement('a');
+        cardLink.className = 'project-card';
+        if (isPlaceholder) {
+          cardLink.classList.add('project-card--soon');
+          cardLink.setAttribute('aria-disabled', 'true');
+          cardLink.addEventListener('click', (event) => event.preventDefault());
+        }
+        cardLink.href = safeUrl;
+        cardLink.setAttribute('aria-label', project.title || `Проект ${index + 1}`);
+
+        if (isExternal) {
+          cardLink.target = '_blank';
+          cardLink.rel = 'noopener noreferrer';
+        }
+
+        const inner = document.createElement('div');
+        inner.className = 'project-card-inner';
+
+        // Верхняя панель карточки: номер и статус
+        const cardHeader = document.createElement('div');
+        cardHeader.className = 'card-header';
+
+        const cardIndex = document.createElement('span');
+        cardIndex.className = 'card-index';
+        cardIndex.textContent = `${String(index + 1).padStart(2, '0')} //`;
+
+        const statusText = typeof project.status === 'string' && project.status.trim()
+          ? project.status.trim()
+          : (isPlaceholder ? 'SOON' : 'LIVE');
+
+        const cardStatus = document.createElement('span');
+        cardStatus.className = 'card-status';
+        if (statusText.toUpperCase() === 'LIVE DEMO' || (!isPlaceholder && statusText.toUpperCase() !== 'SOON')) {
+          cardStatus.classList.add('card-status--live');
+        } else {
+          cardStatus.classList.add('card-status--soon');
+        }
+        cardStatus.textContent = statusText;
+
+        cardHeader.appendChild(cardIndex);
+        cardHeader.appendChild(cardStatus);
+
+        // Основной контент: заголовок и описание
+        const cardBody = document.createElement('div');
+        cardBody.className = 'card-body';
+
+        const cardTitle = document.createElement('h3');
+        cardTitle.className = 'card-title';
+        cardTitle.textContent = project.title || 'Без названия';
+
+        const cardDescription = document.createElement('p');
+        cardDescription.className = 'card-description';
+        cardDescription.textContent = project.description || '';
+
+        cardBody.appendChild(cardTitle);
+        cardBody.appendChild(cardDescription);
+
+        // Нижняя панель: теги и кнопка перехода
+        const cardFooter = document.createElement('div');
+        cardFooter.className = 'card-footer';
+
+        const tagsList = document.createElement('ul');
+        tagsList.className = 'card-tags';
+
+        const tags = Array.isArray(project.tags) ? project.tags : [];
+        tags.forEach((tag) => {
+          const tagItem = document.createElement('li');
+          tagItem.className = 'card-tag';
+          tagItem.textContent = String(tag);
+          tagsList.appendChild(tagItem);
+        });
+
+        const cardAction = document.createElement('span');
+        cardAction.className = 'card-action';
+        if (isPlaceholder) {
+          cardAction.classList.add('card-action--muted');
+        }
+        cardAction.textContent = 'ОТКРЫТЬ ->';
+
+        cardFooter.appendChild(tagsList);
+        cardFooter.appendChild(cardAction);
+
+        inner.appendChild(cardHeader);
+        inner.appendChild(cardBody);
+        inner.appendChild(cardFooter);
+
+        cardLink.appendChild(inner);
+        wrapper.appendChild(cardLink);
+        fragment.appendChild(wrapper);
+      });
+
+      grid.appendChild(fragment);
+    })();
+  </script>
 </body>
 </html>

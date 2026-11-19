@@ -18,7 +18,6 @@
   padding: 0;
 }
 
-
 html,
 body {
   width: 100%;
@@ -32,8 +31,6 @@ body {
   overflow-x: hidden;
   overflow-x: clip;
 }
-
-
 
 /* Внешняя HUD-рамка */
 .hud-frame {
@@ -176,7 +173,8 @@ body {
   grid-template-columns: repeat(3, minmax(200px, 320px));
   justify-content: space-between;
   align-items: end;
-  gap: clamp(24px, 4vw, 64px);
+  row-gap: clamp(36px, 5vh, 64px);
+  column-gap: clamp(24px, 4vw, 64px);
 }
 
 .project-card-wrapper {
@@ -212,12 +210,19 @@ body {
   );
   padding: 4px;
   text-decoration: none;
+  color: inherit;
+}
+
+.project-card--soon {
+  cursor: default;
 }
 
 .project-card-inner {
   width: 100%;
   height: 100%;
-  background: linear-gradient(180deg, #2d2f36 0%, #27292f 100%);
+  background:
+    radial-gradient(circle at 100% 0%, rgba(255, 26, 91, 0.1) 0%, transparent 45%),
+    linear-gradient(180deg, #2d2f36 0%, #1f2127 100%);
   clip-path: polygon(
     0 0,
     calc(100% - 26px) 0,
@@ -226,6 +231,131 @@ body {
     calc(100% - 26px) 100%,
     0 100%
   );
+  padding: 22px 26px 22px 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 14px;
+  overflow: hidden;
+}
+
+/* Внутреннее содержимое карточки */
+.card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  padding-right: 6px;
+}
+
+.card-index {
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  color: rgba(228, 232, 240, 0.58);
+}
+
+.card-status {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 3px 8px;
+  border: 1px solid currentColor;
+  background: rgba(7, 8, 13, 0.55);
+  white-space: nowrap;
+}
+
+.card-status--live {
+  color: var(--neon-cyan);
+  box-shadow: 0 0 10px rgba(0, 255, 163, 0.28);
+  text-shadow: 0 0 6px rgba(0, 255, 163, 0.6);
+}
+
+.card-status--soon {
+  color: var(--neon-magenta);
+  box-shadow: 0 0 10px rgba(230, 0, 255, 0.2);
+  text-shadow: 0 0 6px rgba(230, 0, 255, 0.45);
+}
+
+.card-body {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin: auto 0;
+}
+
+.card-title {
+  font-family: var(--font-display);
+  font-size: clamp(1.1rem, 1.35vw, 1.4rem);
+  font-weight: 700;
+  line-height: 1.2;
+  letter-spacing: 0.03em;
+  color: #ffffff;
+  text-transform: uppercase;
+  transition: color 0.25s ease, text-shadow 0.25s ease;
+}
+
+.project-card-wrapper:hover .project-card:not(.project-card--soon) .card-title {
+  color: var(--neon-cyan);
+  text-shadow: 0 0 10px rgba(0, 255, 163, 0.45);
+}
+
+.card-description {
+  font-family: var(--font-mono);
+  font-size: clamp(0.72rem, 0.78vw, 0.82rem);
+  line-height: 1.55;
+  color: #c7cedb;
+}
+
+.card-footer {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding-top: 10px;
+  border-top: 1px solid rgba(228, 232, 240, 0.14);
+}
+
+.card-tags {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.card-tag {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  color: #e4e8f0;
+  background: rgba(7, 8, 13, 0.6);
+  border: 1px solid rgba(0, 255, 163, 0.28);
+  padding: 3px 7px;
+}
+
+.card-action {
+  display: inline-block;
+  font-family: var(--font-mono);
+  font-size: 0.76rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  color: var(--neon-cyan);
+  text-shadow: 0 0 8px rgba(0, 255, 163, 0.45);
+  transition: transform 0.25s ease, color 0.25s ease, text-shadow 0.25s ease;
+}
+
+.card-action--muted {
+  color: rgba(228, 232, 240, 0.45);
+  text-shadow: none;
+}
+
+.project-card-wrapper:hover .project-card:not(.project-card--soon) .card-action {
+  transform: translateX(6px);
+  color: #ffffff;
+  text-shadow: 0 0 10px rgba(0, 255, 163, 0.85);
 }
 
 /* Персонаж Capri поверх правой карточки */
@@ -255,7 +385,13 @@ body {
   .projects-grid {
     margin-top: 120px;
     grid-template-columns: repeat(3, minmax(180px, 1fr));
-    gap: 28px;
+    row-gap: 44px;
+    column-gap: 28px;
+  }
+
+  .project-card-inner {
+    padding: 18px 22px 18px 16px;
+    gap: 10px;
   }
 
   .capri-overlay {
@@ -276,6 +412,10 @@ body {
 
 /* Адаптация под мобильные устройства */
 @media (max-width: 768px) {
+  .hud-frame {
+    display: none;
+  }
+
   .os-container {
     padding: 34px 28px 44px;
   }
@@ -292,7 +432,20 @@ body {
     margin-top: 48px;
     grid-template-columns: 1fr;
     max-width: 340px;
-    gap: 40px;
+    row-gap: 40px;
+    column-gap: 0;
+  }
+
+  .project-card-inner {
+    padding: 22px 26px 22px 20px;
+  }
+
+  .card-title {
+    font-size: 1.25rem;
+  }
+
+  .card-description {
+    font-size: 0.78rem;
   }
 
   .project-card-wrapper--right {
@@ -304,10 +457,4 @@ body {
     right: -12%;
     width: 96%;
   }
-  
-  @media (max-width: 768px) {
-  .hud-frame {
-    display: none;
-  }
-}
 }
