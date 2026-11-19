@@ -414,6 +414,13 @@ body {
 @media (max-width: 768px) {
   .hud-frame {
     display: none;
+  .project-card-wrapper--right {
+    margin-top: 0;
+  }
+
+  .capri-overlay {
+    display: none;
+  }
   }
 
   .os-container {
