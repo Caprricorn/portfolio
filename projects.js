@@ -22,5 +22,6 @@ const PROJECTS = [
     tags: ["HTML5", "CSS3", "JavaScript"],
     status: "LIVE DEMO"
   }
+];
 
 
