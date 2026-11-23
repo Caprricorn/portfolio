@@ -16,12 +16,11 @@ const PROJECTS = [
     status: "LIVE DEMO"
   },
   {
-    title: 'В разработке',
-    description:
-      'Модуль в активной разработке. Скоро здесь появятся живое демо и описание стека',
-    url: '#',
-    tags: ['In Progress'],
-    status: 'SOON',
-  },
-];
+    title: "CYBER PULSE",
+    url: "https://caprricorn.github.io/cyber/",
+    description: "Сервис онлайн-бронирования для киберклуба с интерактивной картой зала, расчётом тарифов и валидацией номеров",
+    tags: ["HTML5", "CSS3", "JavaScript"],
+    status: "LIVE DEMO"
+  }
+
 
