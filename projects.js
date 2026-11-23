@@ -22,12 +22,11 @@ const PROJECTS = [
     status: 'LIVE DEMO',
   },
   {
-    title: 'В разработке',
-    description:
-      'Новый коммерческий проект на этапе проектирования архитектуры и интерфейса',
-    url: '#',
-    tags: ['In Progress'],
-    status: 'SOON',
+    title: "БК ВЫСОТА",
+    url: "https://caprricorn.github.io/basketball/",
+    description: "Одностраничный лендинг баскетбольной секции с историей клуба и интерактивной формой записи (разделение 18+ / до 18 лет)",
+    tags: ["HTML5", "CSS3", "JavaScript"],
+    status: "LIVE DEMO"
   },
   {
     title: 'В разработке',
