@@ -19,9 +19,10 @@ const PROJECTS = [
     title: "CYBER PULSE",
     url: "https://caprricorn.github.io/cyber/",
     description: "Сервис онлайн-бронирования для киберклуба с интерактивной картой зала, расчётом тарифов и валидацией номеров",
-    tags: ["HTML5", "CSS3", "JavaScript"],
+    tags: ["HTML5", "CSS3"],
     status: "LIVE DEMO"
   }
 ];
+
 
 
