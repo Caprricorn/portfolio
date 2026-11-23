@@ -25,7 +25,7 @@ const PROJECTS = [
     title: "БК ВЫСОТА",
     url: "https://caprricorn.github.io/basketball/",
     description: "Одностраничный лендинг баскетбольной секции с историей клуба и интерактивной формой записи (разделение 18+ / до 18 лет)",
-    tags: ["HTML5", "CSS3", "JavaScript"],
+    tags: ["HTML5", "CSS3"],
     status: "LIVE DEMO"
   },
   {
