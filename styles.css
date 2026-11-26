@@ -454,6 +454,9 @@ body {
 }
 
 @media (max-width: 768px) {
+  .hud-frame {
+    display: none;
+  }
   .os-container {
     padding: 20px 18px 56px;
   }
