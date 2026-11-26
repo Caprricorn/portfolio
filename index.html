@@ -3,192 +3,105 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>PORTFOLIO_OS</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Russo+One&family=Tektur:wght@700;900&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css">
+  <title>Capholder // PORTFOLIO_OS v0.1</title>
+  <!-- Privacy-friendly аналог Google Fonts без логирования IP (GDPR-safe) -->
+  <link rel="preconnect" href="https://fonts.bunny.net">
+  <link href="https://fonts.bunny.net/css?family=jetbrains-mono:400,500,700|tektur:600,700,800,900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css?v=3">
 </head>
 <body>
-  <div class="hud-frame" aria-hidden="true">
-    <svg class="hud-svg" viewBox="0 0 1920 1080" preserveAspectRatio="none">
-      <polygon
-        class="hud-border"
-        points="24,24 1575,24 1592,38 1732,38 1749,24 1896,24 1896,356 1868,376 1868,708 1896,728 1896,1056 346,1056 329,1042 186,1042 169,1056 24,1056 24,728 52,708 52,376 24,356"
+  <div class="os-container">
+    <!-- Растягивающаяся белая HUD-рамка -->
+    <svg class="hud-frame" viewBox="0 0 1000 1000" preserveAspectRatio="none" aria-hidden="true">
+      <path
+        d="M 18 10 L 810 10 L 826 24 L 892 24 L 908 10 L 982 10 L 990 18 L 990 315 L 976 335 L 976 635 L 990 655 L 990 982 L 982 990 L 185 990 L 168 976 L 95 976 L 78 990 L 18 990 L 10 982 L 10 665 L 24 645 L 24 345 L 10 325 L 10 18 Z"
+        fill="none"
+        stroke="rgba(235, 242, 255, 0.78)"
+        stroke-width="1.6"
+        vector-effect="non-scaling-stroke"
       />
     </svg>
-  </div>
 
-  <main class="os-container">
+    <!-- Фоновые неоновые пятна и декоративный код -->
+    <div class="ambient-glow ambient-glow--mint" aria-hidden="true"></div>
+    <div class="ambient-glow ambient-glow--pink" aria-hidden="true"></div>
+
+    <pre class="bg-code bg-code--left" aria-hidden="true">import random
+names = ["world", "friend", "dev"]
+print(f"Hello, {random.choice(names)}!")</pre>
+
+    <pre class="bg-code bg-code--right" aria-hidden="true">total = sum(range(1, 101))
+print("Enter number 1 - 100:")
+print(total)</pre>
+
+    <!-- Верхняя панель -->
     <header class="os-header">
-      <div class="system-status">
-        <p class="status-prompt">Выберите проект</p>
-        <p class="status-version">PORTFOLIO_OS v0.1</p>
-      </div>
-
-      <div class="hero-title-group">
-        <h1 class="hero-title">
-          <span>ДОБРО</span>
-          <span>ПОЖАЛОВАТЬ</span>
-        </h1>
-        <h2 class="hero-subtitle">МОИ ПРОЕКТЫ</h2>
+      <div class="top-left-hud">
+        <nav class="social-links" aria-label="Контакты">
+          <a href="https://github.com/caprricorn" target="_blank" rel="noopener noreferrer" class="hud-btn hud-btn--mint">GITHUB</a>
+          <a href="https://t.me/DOQDKX" target="_blank" rel="noopener noreferrer" class="hud-btn hud-btn--mint">TELEGRAM</a>
+          <a href="mailto:caprpricorn313@gmail.com" class="hud-btn hud-btn--pink">EMAIL</a>
+        </nav>
+        <div class="os-version">PORTFOLIO_OS v0.1</div>
       </div>
     </header>
 
-    <div class="bg-code bg-code-top" aria-hidden="true">
-<pre>import random
-names = ["world", "friend", "cat"]
-print(f"Hello, {random.choice(names)}!")</pre>
-    </div>
+    <!-- Главный заголовок -->
+    <section class="hero">
+      <h1 class="hero-title">CAPHOLDER</h1>
+      <p class="hero-subtitle">PROJECTS</p>
+    </section>
 
-    <div class="bg-code bg-code-right" aria-hidden="true">
-<pre>total = sum(range(1, 101))
-print("enter number 1 - 100:")
-print(total)</pre>
-    </div>
+    <!-- Контейнер карточек из projects.js -->
+    <main class="projects-stage">
+      <!-- Капри сидит на верхнем правом углу первой карточки -->
+      <img src="capri.png" alt="" class="capri-art" aria-hidden="true">
 
-    <section class="projects-grid" id="projects-grid" aria-label="Список проектов"></section>
-
-    <footer class="os-footer" aria-label="Контакты">
-      <a
-        class="footer-btn"
-        href="https://github.com/caprricorn"
-        target="_blank"
-        rel="noopener noreferrer"
-      >GITHUB</a>
-      <a
-        class="footer-btn"
-        href="https://t.me/DOQDKX"
-        target="_blank"
-        rel="noopener noreferrer"
-      >TELEGRAM</a>
-      <a
-        class="footer-btn footer-btn--accent"
-        href="mailto:caprpricorn313@gmail.com"
-      >EMAIL</a>
-    </footer>
-  </main>
+      <div id="projects-list" class="projects-list"></div>
+    </main>
+  </div>
 
   <script src="projects.js"></script>
   <script>
     (function () {
-      const grid = document.getElementById('projects-grid');
-      if (!grid || typeof PROJECTS === 'undefined' || !Array.isArray(PROJECTS)) {
+      const container = document.getElementById('projects-list');
+      if (!container || typeof PROJECTS === 'undefined' || !Array.isArray(PROJECTS)) {
         return;
       }
 
-      const fragment = document.createDocumentFragment();
+      container.innerHTML = PROJECTS.map((project, index) => {
+        const num = String(index + 1).padStart(2, '0');
+        const isLive = project.status && project.status.toUpperCase() === 'LIVE DEMO' && project.url;
+        const cardClass = isLive ? 'project-card project-card--live' : 'project-card project-card--soon';
+        const statusClass = isLive ? 'status-badge status-badge--live' : 'status-badge status-badge--soon';
 
-      PROJECTS.forEach((project, index) => {
-        const wrapper = document.createElement('article');
-        wrapper.className = 'project-card-wrapper';
+        const tagsHtml = (project.tags || [])
+          .map(tag => `<span class="tech-tag">${tag}</span>`)
+          .join('');
 
-        if (index === 2) {
-          wrapper.classList.add('project-card-wrapper--right');
-          const capriImg = document.createElement('img');
-          capriImg.src = 'caprismol.png';
-          capriImg.alt = 'Capri';
-          capriImg.className = 'capri-overlay';
-          wrapper.appendChild(capriImg);
-        }
+        const actionHtml = isLive
+          ? `<a href="${project.url}" target="_blank" rel="noopener noreferrer" class="open-btn">ОТКРЫТЬ -&gt;</a>`
+          : `<span class="open-btn open-btn--disabled">В РАЗРАБОТКЕ</span>`;
 
-        const rawUrl = typeof project.url === 'string' ? project.url.trim() : '#';
-        const isExternal = /^https?:\/\//i.test(rawUrl);
-        const safeUrl = isExternal || rawUrl.startsWith('#') || rawUrl.startsWith('/') ? rawUrl : '#';
-        const isPlaceholder = safeUrl === '#';
-
-        const cardLink = document.createElement('a');
-        cardLink.className = 'project-card';
-        if (isPlaceholder) {
-          cardLink.classList.add('project-card--soon');
-          cardLink.setAttribute('aria-disabled', 'true');
-          cardLink.addEventListener('click', (event) => event.preventDefault());
-        }
-        cardLink.href = safeUrl;
-        cardLink.setAttribute('aria-label', project.title || `Проект ${index + 1}`);
-
-        if (isExternal) {
-          cardLink.target = '_blank';
-          cardLink.rel = 'noopener noreferrer';
-        }
-
-        const inner = document.createElement('div');
-        inner.className = 'project-card-inner';
-
-        // Верхняя панель карточки: номер и статус
-        const cardHeader = document.createElement('div');
-        cardHeader.className = 'card-header';
-
-        const cardIndex = document.createElement('span');
-        cardIndex.className = 'card-index';
-        cardIndex.textContent = `${String(index + 1).padStart(2, '0')} //`;
-
-        const statusText = typeof project.status === 'string' && project.status.trim()
-          ? project.status.trim()
-          : (isPlaceholder ? 'SOON' : 'LIVE');
-
-        const cardStatus = document.createElement('span');
-        cardStatus.className = 'card-status';
-        if (statusText.toUpperCase() === 'LIVE DEMO' || (!isPlaceholder && statusText.toUpperCase() !== 'SOON')) {
-          cardStatus.classList.add('card-status--live');
-        } else {
-          cardStatus.classList.add('card-status--soon');
-        }
-        cardStatus.textContent = statusText;
-
-        cardHeader.appendChild(cardIndex);
-        cardHeader.appendChild(cardStatus);
-
-        // Основной контент: заголовок и описание
-        const cardBody = document.createElement('div');
-        cardBody.className = 'card-body';
-
-        const cardTitle = document.createElement('h3');
-        cardTitle.className = 'card-title';
-        cardTitle.textContent = project.title || 'Без названия';
-
-        const cardDescription = document.createElement('p');
-        cardDescription.className = 'card-description';
-        cardDescription.textContent = project.description || '';
-
-        cardBody.appendChild(cardTitle);
-        cardBody.appendChild(cardDescription);
-
-        // Нижняя панель: теги и кнопка перехода
-        const cardFooter = document.createElement('div');
-        cardFooter.className = 'card-footer';
-
-        const tagsList = document.createElement('ul');
-        tagsList.className = 'card-tags';
-
-        const tags = Array.isArray(project.tags) ? project.tags : [];
-        tags.forEach((tag) => {
-          const tagItem = document.createElement('li');
-          tagItem.className = 'card-tag';
-          tagItem.textContent = String(tag);
-          tagsList.appendChild(tagItem);
-        });
-
-        const cardAction = document.createElement('span');
-        cardAction.className = 'card-action';
-        if (isPlaceholder) {
-          cardAction.classList.add('card-action--muted');
-        }
-        cardAction.textContent = 'ОТКРЫТЬ ->';
-
-        cardFooter.appendChild(tagsList);
-        cardFooter.appendChild(cardAction);
-
-        inner.appendChild(cardHeader);
-        inner.appendChild(cardBody);
-        inner.appendChild(cardFooter);
-
-        cardLink.appendChild(inner);
-        wrapper.appendChild(cardLink);
-        fragment.appendChild(wrapper);
-      });
-
-      grid.appendChild(fragment);
+        return `
+          <article class="${cardClass}">
+            <div class="card-header">
+              <div class="card-title-group">
+                <span class="card-index">${num} //</span>
+                <h2 class="card-title">${project.title}</h2>
+              </div>
+              <div class="card-meta">
+                <div class="tags-row">${tagsHtml}</div>
+                <span class="${statusClass}">${project.status || 'SOON'}</span>
+              </div>
+            </div>
+            <div class="card-body">
+              <p class="card-desc">${project.description || ''}</p>
+              <div class="card-actions">${actionHtml}</div>
+            </div>
+          </article>
+        `;
+      }).join('');
     })();
   </script>
 </body>
