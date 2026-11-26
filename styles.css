@@ -442,12 +442,14 @@ body {
 }
 
 @media (max-width: 1024px) {
-  .capri-art {
-    /*display: none*\;
+  .hero {
+    margin-bottom: 100px;
   }
 
-  .hero {
-    margin-bottom: 48px;
+  .capri-art {
+    width: 185px;
+    top: -155px;
+    right: -24px;
   }
 }
 
@@ -456,9 +458,14 @@ body {
     padding: 20px 18px 56px;
   }
 
-  .hud-frame,
-  .bg-code {
-    /*display: none*\;
+  .hero {
+    margin-bottom: 115px;
+  }
+
+  .capri-art {
+    width: 125px;
+    top: -118px;
+    right: -10px;
   }
 
   .card-header {
