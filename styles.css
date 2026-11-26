@@ -443,7 +443,7 @@ body {
 
 @media (max-width: 1024px) {
   .capri-art {
-    display: none;
+    /*display: none*\;
   }
 
   .hero {
@@ -458,7 +458,7 @@ body {
 
   .hud-frame,
   .bg-code {
-    display: none;
+    /*display: none*\;
   }
 
   .card-header {
