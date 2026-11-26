@@ -21,13 +21,6 @@ const PROJECTS = [
     description: "Сервис онлайн-бронирования для киберклуба с интерактивной картой зала, расчётом тарифов и валидацией номеров",
     tags: ["HTML5", "CSS3"],
     status: "LIVE DEMO"
-  },
-  {
-    title: "just test",
-    url: "https://caprricorn.github.io/cyber/",
-    description: "zzzz",
-    tags: ["HTML5", "CSS3"],
-    status: "LIVE DEMO"
   }
 ];
 
