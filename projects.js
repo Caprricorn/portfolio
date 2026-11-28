@@ -15,3 +15,4 @@ const PROJECTS = [
     tags: ["HTML5", "CSS3"],
     status: "LIVE DEMO"
   },
+];
