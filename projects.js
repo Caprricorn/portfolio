@@ -14,15 +14,6 @@ const PROJECTS = [
     description: "Одностраничный лендинг баскетбольной секции с историей клуба и интерактивной формой записи",
     tags: ["HTML5", "CSS3"],
     status: "LIVE DEMO"
-  },
-  {
-    title: "CYBER PULSE",
-    url: "https://caprricorn.github.io/cyber/",
-    description: "Сервис онлайн-бронирования для киберклуба с интерактивной картой зала, расчётом тарифов и валидацией номеров",
-    tags: ["HTML5", "CSS3"],
-    status: "LIVE DEMO"
   }
-];
-
 
 
